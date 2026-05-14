@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling>=1.29.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "md2print"
+version = "0.1.0"
+description = "Convert Markdown into dense, readable, print-ready HTML."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+  { name = "TC Niedzialkowski" }
+]
+keywords = ["markdown", "print", "html", "cli", "documentation"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Documentation",
+  "Topic :: Text Processing :: Markup :: Markdown",
+]
+dependencies = [
+  "markdown>=3.10.2",
+  "pygments>=2.20.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.5.0",
+  "pytest>=9.0.3",
+  "ruff>=0.15.13",
+  "twine>=6.2.0",
+]
+
+[project.scripts]
+md2print = "md2print.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/tcniedzialkowski/md2print"
+Issues = "https://github.com/tcniedzialkowski/md2print/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/md2print"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
