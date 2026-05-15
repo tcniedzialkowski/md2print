@@ -7,12 +7,12 @@ build/
 *.egg-info/
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
 
 # Local/private working artifacts
 local/
 private/
 scratch/
-Markdown Scans/
 *.pdf
 *.jpg
 *.jpeg
@@ -21,12 +21,10 @@ Markdown Scans/
 *.html
 !examples/outputs/
 !examples/outputs/*.html
-aws_admin_parity_report*
-tc-package-outline-*
 
-# Local planning/reference notes for this pre-public workspace
-NEXT_AGENT_HANDOFF.md
-md2print-project-profile-v1.md
-md2print-python-*.md
-recreate markdown formatter from printed copy.md
-sample_technical_recovery_binder_v2.md
+# Root-level Markdown files are treated as private notes unless explicitly allowlisted.
+/*.md
+!/README.md
+!/CHANGELOG.md
+!/CONTRIBUTING.md
+!/SECURITY.md
