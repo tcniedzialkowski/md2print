@@ -41,3 +41,10 @@ def test_preset_css_variables_are_included() -> None:
     html = convert_markdown_to_html("# Doc", preset="compact-3ring")
 
     assert "--page-margin-inside: 0.9in;" in html
+
+
+def test_curly_braces_in_markdown_do_not_raise() -> None:
+    # Regression: str.format() would KeyError on {word} patterns in content
+    html = convert_markdown_to_html("# Doc\n\nUse `{HOST}` and `${PORT}` to configure.")
+
+    assert "{HOST}" in html

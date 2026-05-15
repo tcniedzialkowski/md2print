@@ -13,14 +13,14 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title}</title>
+<title><!--TITLE--></title>
 <style>
-/* Preset: {preset_label} */
-/* {preset_subtitle} */
-{preset_vars}
-{shared_css}
+/* Preset: <!--PRESET_LABEL--> */
+/* <!--PRESET_SUBTITLE--> */
+<!--PRESET_VARS-->
+<!--SHARED_CSS-->
 
-.print-meta {{
+.print-meta {
     font-size: 8pt;
     color: #888;
     border-bottom: 0.5pt solid #ccc;
@@ -28,12 +28,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     margin-bottom: 8pt;
     display: flex;
     justify-content: space-between;
-}}
+}
 
-.print-meta span {{ font-family: var(--code-font); }}
+.print-meta span { font-family: var(--code-font); }
 
-@media screen {{
-    body {{
+@media screen {
+    body {
         max-width: 8.5in;
         margin: 0 auto;
         padding:
@@ -43,13 +43,13 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             var(--page-margin-inside, var(--page-margin));
         background: #fff;
         box-shadow: 0 0 20px rgba(0,0,0,0.08);
-    }}
-}}
+    }
+}
 </style>
 </head>
 <body>
-{meta_html}
-{content}
+<!--META_HTML-->
+<!--CONTENT-->
 </body>
 </html>
 """
@@ -66,18 +66,20 @@ def render_html_document(
 
     meta_html = ""
     if include_meta:
-        meta_html = f"""
-<div class="print-meta">
-    <span>{escape(preset.label)}</span>
-    <span>Printed from md2print</span>
-</div>"""
+        meta_html = (
+            f'\n<div class="print-meta">'
+            f"\n    <span>{escape(preset.label)}</span>"
+            f"\n    <span>Printed from md2print</span>"
+            f"\n</div>"
+        )
 
-    return HTML_TEMPLATE.format(
-        title=escape(title),
-        preset_label=escape(preset.label),
-        preset_subtitle=escape(preset.subtitle),
-        preset_vars=preset.css_vars,
-        shared_css=SHARED_CSS,
-        meta_html=meta_html,
-        content=content,
+    return (
+        HTML_TEMPLATE
+        .replace("<!--TITLE-->", escape(title))
+        .replace("<!--PRESET_LABEL-->", escape(preset.label))
+        .replace("<!--PRESET_SUBTITLE-->", escape(preset.subtitle))
+        .replace("<!--PRESET_VARS-->", preset.css_vars)
+        .replace("<!--SHARED_CSS-->", SHARED_CSS)
+        .replace("<!--META_HTML-->", meta_html)
+        .replace("<!--CONTENT-->", content)
     )
