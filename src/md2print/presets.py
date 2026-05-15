@@ -15,13 +15,16 @@ class Preset:
     css_vars: str
 
 
-COMPACT_CSS_VARS = """
-:root {
+def compact_css_vars(*, page_margin_inside: str = "0.5in") -> str:
+    """Return compact preset CSS variables with structural page options."""
+
+    return f"""
+:root {{
     /* Page */
     --page-margin: 0.5in;
     --page-margin-top: 0.5in;
     --page-margin-bottom: 0.5in;
-    --page-margin-inside: 0.5in;
+    --page-margin-inside: {page_margin_inside};
     --page-margin-outside: 0.5in;
 
     /* Typography */
@@ -83,8 +86,12 @@ COMPACT_CSS_VARS = """
     --hr-color: #bbb;
     --blockquote-border: #999;
     --blockquote-color: #333;
-}
+}}
 """
+
+
+COMPACT_CSS_VARS = compact_css_vars()
+COMPACT_3RING_CSS_VARS = compact_css_vars(page_margin_inside="0.9in")
 
 PRESETS: dict[str, Preset] = {
     "compact": Preset(
@@ -97,10 +104,7 @@ PRESETS: dict[str, Preset] = {
         name="compact-3ring",
         label="Compact 3-Ring",
         subtitle="Compact with 0.9in alternating binder margin for 3-ring punched pages",
-        css_vars=COMPACT_CSS_VARS.replace(
-            "--page-margin-inside: 0.5in;",
-            "--page-margin-inside: 0.9in;",
-        ),
+        css_vars=COMPACT_3RING_CSS_VARS,
     ),
 }
 
@@ -110,4 +114,7 @@ DEFAULT_PRESET = "compact"
 def get_preset(name: str) -> Preset:
     """Return a preset by name."""
 
+    if name not in PRESETS:
+        valid_presets = ", ".join(PRESETS)
+        raise KeyError(f"Unknown preset {name!r}. Valid presets: {valid_presets}")
     return PRESETS[name]

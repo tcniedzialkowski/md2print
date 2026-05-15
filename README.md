@@ -24,13 +24,28 @@ md2print report.md --output print.html
 md2print report.md --meta
 ```
 
-By default, `md2print input.md` writes `input.html`.
+By default, `md2print input.md` writes `input.html`. Existing files are left untouched unless you pass `--force`.
 
 For duplex 3-ring binder printing:
 
 ```bash
 md2print report.md --preset compact-3ring
 ```
+
+## CLI Reference
+
+```bash
+md2print [options] input.md
+```
+
+Options:
+
+- `-o, --output PATH`: write to a specific HTML file instead of deriving one from the input filename.
+- `-p, --preset NAME`: choose a print preset. Defaults to `compact`.
+- `--meta`: include a small print metadata banner in the generated document.
+- `--force`: overwrite the output file if it already exists.
+- `--list-presets`: print available presets and exit.
+- `--version`: print the installed version and exit.
 
 ## Presets
 
