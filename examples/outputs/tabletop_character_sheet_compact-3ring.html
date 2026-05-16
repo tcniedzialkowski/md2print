@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tabletop Character Sheet</title>
+<style>
+/* Preset: Compact 3-Ring */
+/* Compact with 0.9in alternating binder margin for 3-ring punched pages */
+
+:root {
+    /* Page */
+    --page-margin: 0.5in;
+    --page-margin-top: 0.5in;
+    --page-margin-bottom: 0.5in;
+    --page-margin-inside: 0.9in;
+    --page-margin-outside: 0.5in;
+
+    /* Typography */
+    --body-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --body-size: 9.5pt;
+    --body-lh: 1.28;
+    --text-color: #111;
+    --heading-color: #111;
+
+    /* Heading sizes */
+    --h1-size: 15pt;
+    --h2-size: 12pt;
+    --h3-size: 10.5pt;
+    --h4-size: 9.5pt;
+
+    /* Heading decoration */
+    --h1-border: 1.5px solid #222;
+    --h1-pad-bottom: 3pt;
+    --h2-border: 1px solid #aaa;
+    --h2-pad-bottom: 2pt;
+
+    /* Spacing */
+    --section-gap: 10pt;
+    --subsection-gap: 7pt;
+    --heading-gap: 3pt;
+    --para-gap: 4pt;
+
+    /* Inline code */
+    --code-font: "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+    --code-size: 0.86em;
+    --code-bg: #e5e5e5;
+    --code-color: #111;
+    --code-border: 1px solid #c0c0c0;
+    --code-radius: 2px;
+    --code-pad: 0.5px 3px;
+
+    /* Code blocks */
+    --pre-bg: #e5e5e5;
+    --pre-border: 1px solid #b0b0b0;
+    --pre-radius: 3px;
+    --pre-pad: 4pt 6pt;
+    --pre-lh: 1.25;
+    --pre-code-size: 8.5pt;
+    --pre-color: #111;
+
+    /* Tables */
+    --table-size: 8.5pt;
+    --table-lh: 1.25;
+    --table-border: 1px solid #999;
+    --table-cell-pad: 2pt 4pt;
+    --table-header-bg: #e0e0e0;
+    --table-stripe: #f3f3f3;
+
+    /* Lists */
+    --list-indent: 1.2em;
+    --list-item-gap: 1pt;
+
+    /* Misc */
+    --hr-color: #bbb;
+    --blockquote-border: #999;
+    --blockquote-color: #333;
+}
+
+
+/* Reset and base */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+@page {
+    size: letter;
+    margin:
+        var(--page-margin-top, var(--page-margin))
+        var(--page-margin-outside, var(--page-margin))
+        var(--page-margin-bottom, var(--page-margin))
+        var(--page-margin-inside, var(--page-margin));
+}
+
+@page :left {
+    margin-left: var(--page-margin-outside, var(--page-margin));
+    margin-right: var(--page-margin-inside, var(--page-margin));
+}
+
+@page :right {
+    margin-left: var(--page-margin-inside, var(--page-margin));
+    margin-right: var(--page-margin-outside, var(--page-margin));
+}
+
+@media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    h1, h2, h3, h4 { break-after: avoid; }
+    figure, pre { break-inside: avoid; }
+    table { break-inside: auto; }
+    thead { display: table-header-group; }
+    tr { break-inside: avoid; }
+}
+
+body {
+    font-family: var(--body-font);
+    font-size: var(--body-size);
+    line-height: var(--body-lh);
+    color: var(--text-color);
+    max-width: 100%;
+    padding: 0;
+}
+
+h1 {
+    font-size: var(--h1-size);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 var(--heading-gap) 0;
+    color: var(--heading-color);
+    border-bottom: var(--h1-border);
+    padding-bottom: var(--h1-pad-bottom);
+}
+
+h2 {
+    font-size: var(--h2-size);
+    font-weight: 600;
+    line-height: 1.2;
+    margin: var(--section-gap) 0 var(--heading-gap) 0;
+    color: var(--heading-color);
+    border-bottom: var(--h2-border);
+    padding-bottom: var(--h2-pad-bottom);
+}
+
+h3 {
+    font-size: var(--h3-size);
+    font-weight: 600;
+    line-height: 1.25;
+    margin: var(--subsection-gap) 0 var(--heading-gap) 0;
+    color: var(--heading-color);
+}
+
+h4 {
+    font-size: var(--h4-size);
+    font-weight: 600;
+    line-height: 1.3;
+    margin: var(--subsection-gap) 0 calc(var(--heading-gap) * 0.7) 0;
+    color: var(--heading-color);
+}
+
+p { margin: 0 0 var(--para-gap) 0; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+
+a { color: var(--text-color); text-decoration: underline; }
+@media print { a { text-decoration: none; } }
+
+code {
+    font-family: var(--code-font);
+    font-size: var(--code-size);
+    background: var(--code-bg);
+    color: var(--code-color);
+    border: var(--code-border);
+    border-radius: var(--code-radius);
+    padding: var(--code-pad);
+    word-break: break-all;
+}
+
+h1 code, h2 code, h3 code, h4 code {
+    font-family: inherit;
+    background: #eeeeee;
+    border: 1px solid #d0d0d0;
+    border-radius: 3px;
+    padding: 0 3px;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+pre {
+    background: var(--pre-bg);
+    border: var(--pre-border);
+    border-radius: var(--pre-radius);
+    padding: var(--pre-pad);
+    margin: 0 0 var(--para-gap) 0;
+    overflow-x: auto;
+    line-height: var(--pre-lh);
+}
+
+pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: var(--pre-code-size);
+    color: var(--pre-color);
+    border-radius: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 var(--para-gap) 0;
+    font-size: var(--table-size);
+    line-height: var(--table-lh);
+}
+
+th, td {
+    border: var(--table-border);
+    padding: var(--table-cell-pad);
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background: var(--table-header-bg);
+    font-weight: 600;
+    color: var(--heading-color);
+}
+
+tr:nth-child(even) td { background: var(--table-stripe); }
+
+ul, ol {
+    margin: 0 0 var(--para-gap) 0;
+    padding-left: var(--list-indent);
+}
+
+li { margin-bottom: var(--list-item-gap); }
+
+li > ul, li > ol {
+    margin-top: var(--list-item-gap);
+    margin-bottom: 0;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--hr-color);
+    margin: var(--section-gap) 0;
+}
+
+blockquote {
+    border-left: 3px solid var(--blockquote-border);
+    padding-left: 0.6em;
+    margin: 0 0 var(--para-gap) 0;
+    color: var(--blockquote-color);
+}
+
+body > h1:first-child { margin-top: 0; }
+
+
+.print-meta {
+    font-size: 8pt;
+    color: #888;
+    border-bottom: 0.5pt solid #ccc;
+    padding-bottom: 3pt;
+    margin-bottom: 8pt;
+    display: flex;
+    justify-content: space-between;
+}
+
+.print-meta span { font-family: var(--code-font); }
+
+@media screen {
+    body {
+        max-width: 8.5in;
+        margin: 0 auto;
+        padding:
+            var(--page-margin-top, var(--page-margin))
+            var(--page-margin-outside, var(--page-margin))
+            var(--page-margin-bottom, var(--page-margin))
+            var(--page-margin-inside, var(--page-margin));
+        background: #fff;
+        box-shadow: 0 0 20px rgba(0,0,0,0.08);
+    }
+}
+</style>
+</head>
+<body>
+
+<h1 id="tabletop-character-sheet">Tabletop Character Sheet</h1>
+<p>This system-neutral example shows how a Markdown character sheet can be
+prepared for print.</p>
+<h2 id="character-summary">Character Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>Rowan Vale</td>
+</tr>
+<tr>
+<td>Role</td>
+<td>Wayfinder</td>
+</tr>
+<tr>
+<td>Background</td>
+<td>Archivist</td>
+</tr>
+<tr>
+<td>Player</td>
+<td>Example Player</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ability-scores">Ability Scores</h2>
+<table>
+<thead>
+<tr>
+<th>Ability</th>
+<th style="text-align: right;">Score</th>
+<th style="text-align: right;">Modifier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Might</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">+1</td>
+</tr>
+<tr>
+<td>Agility</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">+2</td>
+</tr>
+<tr>
+<td>Insight</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">+2</td>
+</tr>
+<tr>
+<td>Presence</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">+0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="skills-and-proficiencies">Skills and Proficiencies</h2>
+<ul>
+<li>Cartography</li>
+<li>Ancient languages</li>
+<li>Campcraft</li>
+<li>Short blade</li>
+</ul>
+<h2 id="equipment">Equipment</h2>
+<ul>
+<li>Weatherproof journal</li>
+<li>Brass compass</li>
+<li>Travel cloak</li>
+<li>Lantern and oil</li>
+</ul>
+<h2 id="spells-or-special-features">Spells or Special Features</h2>
+<ul>
+<li>Trace a safe route through unfamiliar terrain.</li>
+<li>Recall a useful detail from a studied archive.</li>
+<li>Mark a campsite so allies can find it at dusk.</li>
+</ul>
+<h2 id="session-notes">Session Notes</h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Session 1</td>
+<td>Accepted a map fragment from the town archivist.</td>
+</tr>
+<tr>
+<td>Session 2</td>
+<td>Found a sealed door beneath the old observatory.</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

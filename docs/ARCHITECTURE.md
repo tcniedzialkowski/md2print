@@ -20,6 +20,8 @@ The first release emits HTML, not PDF. That is deliberate. Browser print dialogs
 
 The generated file is self-contained and does not load external assets.
 
+Pagination is also browser-owned in v0.1. md2print can influence page breaks and margins with CSS, but the browser decides final page numbers after paper size, scaling, headers, footers, and printer settings are selected. See `docs/PAGINATION.md` for the current research backlog.
+
 ## No Chromium Dependency
 
 md2print does not bundle or invoke Chromium. The tool should stay lightweight and install cleanly with `pipx`.

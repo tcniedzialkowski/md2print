@@ -9,6 +9,15 @@ build/
 .ruff_cache/
 .mypy_cache/
 
+# Common local secret files
+.env
+.env.*
+*.pem
+*.key
+id_rsa
+id_rsa.pub
+credentials.json
+
 # Local/private working artifacts
 local/
 private/

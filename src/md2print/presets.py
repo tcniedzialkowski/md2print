@@ -22,8 +22,8 @@ def compact_css_vars(*, page_margin_inside: str = "0.5in") -> str:
 :root {{
     /* Page */
     --page-margin: 0.5in;
-    --page-margin-top: 0.5in;
-    --page-margin-bottom: 0.5in;
+    --page-margin-top: 0.6in;
+    --page-margin-bottom: 0.7in;
     --page-margin-inside: {page_margin_inside};
     --page-margin-outside: 0.5in;
 
@@ -97,7 +97,7 @@ PRESETS: dict[str, Preset] = {
     "compact": Preset(
         name="compact",
         label="Compact",
-        subtitle="Maximum density (9.5pt/1.28, 0.5in) with tight tables and minimal gaps",
+        subtitle="Dense technical print layout with footer-safe vertical margins",
         css_vars=COMPACT_CSS_VARS,
     ),
     "compact-3ring": Preset(

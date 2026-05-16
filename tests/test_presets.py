@@ -20,6 +20,11 @@ def test_compact_3ring_does_not_mutate_compact_margin() -> None:
     assert "--page-margin-inside: 0.5in;" in PRESETS["compact"].css_vars
 
 
+def test_compact_uses_footer_safe_vertical_margins() -> None:
+    assert "--page-margin-top: 0.6in;" in PRESETS["compact"].css_vars
+    assert "--page-margin-bottom: 0.7in;" in PRESETS["compact"].css_vars
+
+
 def test_get_preset_error_lists_valid_names() -> None:
     with pytest.raises(KeyError) as exc_info:
         get_preset("badname")

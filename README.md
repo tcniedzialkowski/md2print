@@ -51,13 +51,22 @@ Options:
 
 ## Presets
 
-`compact` is the default compact layout: 9.5pt body text, tight spacing, visible table borders, light print-friendly code blocks, and 0.5-inch margins.
+`compact` is the default layout: 9.5pt body text, tight spacing, visible table borders, light print-friendly code blocks, and footer-safe vertical margins for browser printing.
 
 `compact-3ring` uses the same density with a 0.9-inch alternating inside margin for duplex pages that will be hole-punched for a 3-ring binder.
 
+## Examples
+
+The `examples/` directory includes sample Markdown documents and rendered HTML output:
+
+- [Engineering report sample](examples/outputs/engineering_report.html)
+- [Tabletop character sheet, compact-3ring](examples/outputs/tabletop_character_sheet_compact-3ring.html)
+
 ## Why HTML Instead Of PDF?
 
-The browser print dialog is good at the final mile: duplex, page ranges, scaling, destination printers, and Save as PDF. md2print focuses on producing clean single-file HTML with print CSS and lets the browser handle device-specific printing.
+The browser print dialog is good at the final mile: duplex, page ranges, scaling, destination printers, page numbering, and Save as PDF. md2print focuses on producing clean single-file HTML with print CSS and lets the browser handle device-specific printing.
+
+For clean output, disable browser-generated headers and footers in the print dialog. For longer drafts where page order matters, enable them to get browser page numbers. md2print does not yet own page numbering.
 
 There is no Chromium dependency, hosted service, or bundled PDF renderer.
 
@@ -80,6 +89,8 @@ md2print is for dense technical documents you want to print, read, and mark up.
 ## Roadmap
 
 - Polish the first release from real printed output.
+- Research md2print-owned page numbering and print footers.
+- Consider tighter preset variants for users who print without browser headers and footers.
 - Add release automation after the manual release path is proven.
 - Consider additional Markdown features and print presets only after the core CLI proves useful in daily use.
 - Consider Rust or Typst only if distribution or low-level safety becomes a stronger reason to move beyond Python.
