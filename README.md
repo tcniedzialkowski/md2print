@@ -6,8 +6,10 @@ It is intentionally small: run one command and get one self-contained HTML file.
 
 ## Install
 
+Until md2print is published to PyPI, install the first release directly from GitHub:
+
 ```bash
-pipx install md2print
+pipx install 'git+https://github.com/tcniedzialkowski/md2print.git@v0.1.0'
 ```
 
 For local development from this repository:
