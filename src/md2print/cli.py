@@ -11,15 +11,19 @@ from md2print.convert import convert_markdown_to_html
 from md2print.presets import DEFAULT_PRESET, PRESETS
 
 
-def build_parser() -> argparse.ArgumentParser:
+def build_parser(*, require_input: bool = True) -> argparse.ArgumentParser:
     """Build the public v0.1 command line parser."""
 
     parser = argparse.ArgumentParser(
         prog="md2print",
         description="Convert Markdown to dense, readable, print-ready HTML.",
     )
-    parser.add_argument("input", nargs="?", help="Input Markdown file")
+    if require_input:
+        parser.add_argument("input", help="Input Markdown file")
+    else:
+        parser.add_argument("input", nargs="?", help="Input Markdown file")
     parser.add_argument("-o", "--output", help="Output HTML path")
+    parser.add_argument("--force", action="store_true", help="Overwrite the output file if it exists")
     parser.add_argument(
         "-p",
         "--preset",
@@ -53,16 +57,15 @@ def list_presets() -> None:
 def main(argv: list[str] | None = None) -> int:
     """Run the md2print CLI."""
 
-    parser = build_parser()
-    args = parser.parse_args(argv)
+    raw_args = sys.argv[1:] if argv is None else argv
+    parser = build_parser(require_input="--list-presets" not in raw_args)
+    args = parser.parse_args(raw_args)
 
     if args.list_presets:
         list_presets()
         return 0
 
-    if not args.input:
-        parser.error("the following arguments are required: input")
-
+    assert args.input is not None
     input_path = Path(args.input)
     if not input_path.exists():
         print(f"Error: {input_path} not found", file=sys.stderr)
@@ -76,6 +79,9 @@ def main(argv: list[str] | None = None) -> int:
 
     html = convert_markdown_to_html(markdown_text, preset=args.preset, include_meta=args.meta)
     output_path = output_path_for(input_path, args.preset, explicit_output=args.output)
+    if output_path.exists() and not args.force:
+        print(f"Error: {output_path} already exists; use --force to overwrite", file=sys.stderr)
+        return 1
 
     try:
         output_path.write_text(html, encoding="utf-8")

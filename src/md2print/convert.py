@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from typing import cast
 
 import markdown
 
@@ -38,7 +39,7 @@ def markdown_to_body_html(markdown_text: str) -> str:
             "codehilite": {"css_class": "highlight", "guess_lang": False},
         },
     )
-    return md.convert(markdown_text)
+    return cast(str, md.convert(markdown_text))
 
 
 def convert_markdown_to_html(
