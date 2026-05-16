@@ -77,7 +77,7 @@ md2print is for dense technical documents you want to print, read, and mark up.
 
 ## Roadmap
 
-- Polish v0.1 from real printed output.
-- Add CI and release automation after the local package is stable.
+- Polish the first release from real printed output.
+- Add release automation after the manual release path is proven.
 - Consider additional Markdown features and print presets only after the core CLI proves useful in daily use.
 - Consider Rust or Typst only if distribution or low-level safety becomes a stronger reason to move beyond Python.

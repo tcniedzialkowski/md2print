@@ -8,8 +8,11 @@ md2print is in early v0.1 development. The project is intentionally narrow: dens
 python3 -m venv .venv
 .venv/bin/python -m pip install -U pip
 .venv/bin/python -m pip install -e '.[dev]'
-.venv/bin/ruff check .
 .venv/bin/pytest
+.venv/bin/ruff check .
+.venv/bin/mypy src/
+.venv/bin/python -m build
+.venv/bin/python -m twine check dist/*
 ```
 
 ## Scope
