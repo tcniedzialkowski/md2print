@@ -21,4 +21,5 @@ For clean output, users can disable browser-generated headers and footers in the
 - Determine whether md2print can provide reliable title and page-number footers in plain browser-printed HTML.
 - If browser support is not reliable, evaluate Paged.js, WeasyPrint, Typst, or another paged-media path for a later phase.
 - Explore `compact-tight` and `compact-3ring-tight` presets for users who disable browser headers and footers.
-- Revisit long `pre` block pagination so oversized code/tree blocks do not leave mostly blank previous pages.
+- Revisit long `pre` block pagination so large preformatted code blocks do not leave mostly blank
+  previous pages.
