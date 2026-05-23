@@ -27,6 +27,7 @@ scratch/
 *.jpg
 *.jpeg
 *.png
+!docs/readme-output-screenshot.png
 *.webloc
 *.html
 !examples/outputs/

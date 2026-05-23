@@ -4,6 +4,13 @@ md2print converts Markdown into dense, readable, print-ready HTML for technical 
 
 It is intentionally small: run one command and get one self-contained HTML file. Open it in a browser, print it, annotate it, and keep moving.
 
+<!-- README_SCREENSHOT_START -->
+![Screenshot of md2print-generated HTML opened in a browser](docs/readme-output-screenshot.png)
+
+_Example of this README rendered by md2print as self-contained HTML and opened in a browser._
+<!-- Regenerate with scripts/update-readme-screenshot.sh. -->
+<!-- README_SCREENSHOT_END -->
+
 ## Install
 
 Until md2print is published to PyPI, install the first release directly from GitHub:
