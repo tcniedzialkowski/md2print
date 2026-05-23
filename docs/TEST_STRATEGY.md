@@ -220,7 +220,7 @@ This project can be presented as a compact technical publishing tool with an eng
 test strategy. Strong resume points include:
 
 - Built a Python CLI that converts Markdown into self-contained, print-ready HTML.
-- Designed print presets for dense technical documents, including a duplex 3-ring binder layout.
+- Designed print presets for dense technical documents, including 3-ring binder-bound output.
 - Added automated tests for CLI safety, conversion behavior, preset contracts, and regression
   cases.
 - Documented manual visual regression cases for browser-owned print behavior.

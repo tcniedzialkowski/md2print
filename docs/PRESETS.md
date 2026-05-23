@@ -12,7 +12,7 @@ It uses compact body text, tight paragraph spacing, visible table borders, light
 
 `compact-3ring` keeps the same density but changes the inside page margin to `0.9in`.
 
-The CSS uses alternating `@page :left` and `@page :right` margins so duplex pages leave more room near the punched edge when placed in a 3-ring binder.
+The CSS uses left/right page margins to leave more room near the punched edge for 3-ring binder-bound output.
 
 ## Future Presets
 

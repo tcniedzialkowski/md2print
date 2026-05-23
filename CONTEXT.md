@@ -16,7 +16,7 @@ The default preset. It favors dense technical reading: small body text, tight sp
 _Avoid_: small, dense, tight
 
 **Compact-3ring**:
-A preset variant of compact with a wider alternating inside margin for duplex pages destined for a 3-ring binder.
+A preset variant of compact with a wider inside margin for print artifacts destined for a 3-ring binder.
 _Avoid_: binder mode, hole-punch preset
 
 **Meta banner**:
@@ -34,6 +34,10 @@ The browser-side print workflow: duplex, page-range selection, scaling, destinat
 md2print produces input to the final mile but does not own it.
 _Avoid_: printing, output stage, finishing
 
+**Print artifact**:
+The downstream result produced in the final mile: either a physical printout or a browser Save-as-PDF file.
+_Avoid_: paper artifact, printed output, PDF output
+
 **Source document**:
 The input Markdown file the user passes on the command line.
 Treat it as potentially sensitive; the generated HTML inherits the same sensitivity.
@@ -43,8 +47,8 @@ _Avoid_: input file, markdown file, doc
 
 - A source document plus a preset produces one self-contained HTML file.
 - A preset may include a meta banner when `--meta` is set.
-- Compact-3ring is a structural variant of compact; do not derive it with fragile string replacement.
-- The final mile consumes one self-contained HTML file and produces the physical printout or PDF artifact.
+- Compact-3ring is a structural variant of compact for binder-bound print artifacts; do not derive it with fragile string replacement.
+- The final mile consumes one self-contained HTML file and produces the print artifact.
 
 ## Product Boundaries
 
@@ -59,3 +63,4 @@ _Avoid_: input file, markdown file, doc
 - Use **preset**, not theme or style, for named output configurations.
 - Use **source document** for the input Markdown and **self-contained HTML** for the generated output.
 - Disambiguate print-ready HTML from the browser's final-mile print workflow.
+- Use **print artifact** when referring to the final physical paper or Save-as-PDF result.

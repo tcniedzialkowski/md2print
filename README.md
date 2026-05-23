@@ -28,7 +28,7 @@ md2print report.md --meta
 
 By default, `md2print input.md` writes `input.html`. Existing files are left untouched unless you pass `--force`.
 
-For duplex 3-ring binder printing:
+For 3-ring binder-bound output:
 
 ```bash
 md2print report.md --preset compact-3ring
@@ -53,14 +53,28 @@ Options:
 
 `compact` is the default layout: 9.5pt body text, tight spacing, visible table borders, light print-friendly code blocks, and footer-safe vertical margins for browser printing.
 
-`compact-3ring` uses the same density with a 0.9-inch alternating inside margin for duplex pages that will be hole-punched for a 3-ring binder.
+`compact-3ring` uses the same density with a wider binding margin for 3-ring binder-bound output.
 
 ## Examples
 
-The `examples/` directory includes sample Markdown documents and rendered HTML output:
+The `examples/` directory includes sample Markdown documents and generated HTML output:
 
 - [Engineering report sample](examples/outputs/engineering_report.html)
 - [Tabletop character sheet, compact-3ring](examples/outputs/tabletop_character_sheet_compact-3ring.html)
+
+Open an example in your browser and use Print or Save as PDF to create the final output.
+
+## Recommended Print Settings
+
+These are browser print-dialog settings, not md2print CLI options.
+
+After opening the generated HTML in your browser, start with:
+
+- Paper size: Letter.
+- Margins: default.
+- Scale: 100%.
+- Background graphics: enabled.
+- Headers and footers: off for the cleanest printed output; on if you need printed page numbers.
 
 ## Why HTML Instead Of PDF?
 

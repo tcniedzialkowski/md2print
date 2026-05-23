@@ -17,6 +17,8 @@ For clean output, users can disable browser-generated headers and footers in the
 
 ## Research Backlog
 
+Tracked in GitHub issue [#13](https://github.com/tcniedzialkowski/md2print/issues/13).
+
 - Test `@page` margin boxes and `counter(page)` / `counter(pages)` in Chrome, Safari, and Firefox.
 - Determine whether md2print can provide reliable title and page-number footers in plain browser-printed HTML.
 - If browser support is not reliable, evaluate Paged.js, WeasyPrint, Typst, or another paged-media path for a later phase.

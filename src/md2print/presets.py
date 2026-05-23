@@ -103,7 +103,7 @@ PRESETS: dict[str, Preset] = {
     "compact-3ring": Preset(
         name="compact-3ring",
         label="Compact 3-Ring",
-        subtitle="Compact with 0.9in alternating binder margin for 3-ring punched pages",
+        subtitle="Compact with 0.9in binding margin for 3-ring binder-bound output",
         css_vars=COMPACT_3RING_CSS_VARS,
     ),
 }
