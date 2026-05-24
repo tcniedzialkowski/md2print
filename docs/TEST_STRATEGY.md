@@ -8,10 +8,11 @@ evolves.
 
 ## What The Automated Tests Cover
 
-The automated suite currently has 24 pytest tests across three areas:
+The automated suite currently has 25 pytest tests across four areas:
 
 - CLI behavior in `tests/test_cli.py`
 - Markdown conversion and shared CSS behavior in `tests/test_convert.py`
+- Output-quality fixture coverage in `tests/test_convert.py` using `tests/fixtures/output_quality.md`
 - Preset definitions and preset lookup behavior in `tests/test_presets.py`
 
 These tests are intentionally small and direct. They mostly exercise public behavior rather than
@@ -142,6 +143,23 @@ format placeholders.
 
 How it works: converts Markdown containing `{HOST}` and `${PORT}` and checks that literal braces
 survive.
+
+## Output-Quality Fixture Test
+
+### `test_output_quality_fixture_preserves_technical_print_content`
+
+Why the test exists: protects md2print's dense technical print-output promise without relying on a
+broad HTML snapshot or browser-rendered visual diff.
+
+How it works: converts `tests/fixtures/output_quality.md`, a stable source document containing
+headings, prose, emphasis, inline code, fenced code, a list, a blockquote, a table, and long
+technical values such as paths, URLs, config values, log lines, and identifier-like strings. The
+assertions check that the generated HTML is complete, self-contained, uses the default compact
+preset, omits the meta banner by default, and preserves representative technical content.
+
+This test does not prove browser pagination or final-mile print quality. Browser-rendered CI is
+intentionally deferred until a specific repeatable visual regression justifies the added dependency
+and maintenance cost. Manual visual risks remain tracked in `docs/TESTING.md`.
 
 ## Preset Tests
 
